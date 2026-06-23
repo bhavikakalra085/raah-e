@@ -494,10 +494,11 @@ export default function UserLoginPage() {
         </div>
       </main>
 
-      {isRegisterOpen && (
+            {isRegisterOpen && (
         <RegisterModal
           onClose={handleRegisterClose}
           prefillIdentifier={prefillIdentifier}
+          API_BASE={API_BASE}
           DEMO_FALLBACK={DEMO_FALLBACK}
           onRegisterSuccess={handleRegisterSuccess}
         />
