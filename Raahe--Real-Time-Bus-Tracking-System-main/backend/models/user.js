@@ -13,10 +13,9 @@ const userSchema = new mongoose.Schema({
   email: {
     type: String,
     trim: true,
-    index: true,
     required: function () { return this.role !== 'driver'; },
+    unique: true,
     sparse: true,
-    unique: false, // keep non-unique if you want multiple drivers without email
   },
 
   // required for user/admin; not required for driver (OTP)
@@ -52,9 +51,6 @@ const userSchema = new mongoose.Schema({
   // admin-only
   adminSecret: { type: String, trim: true },
 });
-
-// helper index if you also want to enforce unique emails for non-drivers
-userSchema.index({ email: 1 }, { unique: true, sparse: true });
 
 userSchema.set('toJSON', {
   transform: (_doc, ret) => {
