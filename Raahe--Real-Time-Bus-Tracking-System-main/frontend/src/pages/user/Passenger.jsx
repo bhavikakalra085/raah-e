@@ -3,7 +3,7 @@ import React, { useEffect, useState, useRef, useMemo } from "react";
 import { GoogleMap, Marker, Polyline } from "@react-google-maps/api";
 import { useGoogleMaps } from "../../lib/GoogleMapsProvider.jsx";
 
-const API_BASE = import.meta.env.VITE_API_BASE || "http://localhost:5000";
+const API_BASE = import.meta.env.VITE_API_BASE || "";
 
 // === Hardcoded speed for ETA (km/h) ===
 const BUS_SPEED_KMPH = 35;

@@ -1,8 +1,16 @@
 {
-    "rewrites":[
-      {
-        "source":"/(.*)",
-        "destination":"/index.html"
-      }
-    ]
-  }
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "https://backend-k9wda1doj-bkalra-be23-thaparedus-projects.vercel.app/api/:path*"
+    },
+    {
+      "source": "/socket.io/:path*",
+      "destination": "https://backend-k9wda1doj-bkalra-be23-thaparedus-projects.vercel.app/socket.io/:path*"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}

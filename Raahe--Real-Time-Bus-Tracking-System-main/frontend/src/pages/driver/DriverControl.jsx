@@ -35,7 +35,7 @@ export default function DriverControl({ token: propToken, driverId, apiBase = ""
   const pointsRef = useRef([]); // for distance/speed
 
   // Memoize BASE & auth header so they don't bounce between renders
-  const BASE = useMemo(() => apiBase || "http://localhost:5000", [apiBase]);
+  const BASE = useMemo(() => apiBase || import.meta.env.VITE_API_BASE || "", [apiBase]);
   const storedToken = useMemo(() => propToken || localStorage.getItem("token") || null, [propToken]);
   const authHeader = useMemo(
     () => ({ headers: { Authorization: storedToken ? `Bearer ${storedToken}` : "" } }),

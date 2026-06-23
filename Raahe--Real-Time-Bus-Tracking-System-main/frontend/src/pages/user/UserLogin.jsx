@@ -40,6 +40,7 @@ export default function UserLoginPage() {
   const [registerSuccess, setRegisterSuccess] = useState(""); // success message after register
 
   const navigate = useNavigate();
+  const API_BASE = import.meta.env.VITE_API_BASE || "";
   const DEMO_FALLBACK = true;
 
   function validateEmail(e) {
@@ -78,7 +79,7 @@ export default function UserLoginPage() {
 
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:5000/api/users/send-otp", {
+      const res = await fetch(`${API_BASE}/api/users/send-otp`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ phone: phone.trim(), role: "driver" }),
@@ -162,7 +163,7 @@ export default function UserLoginPage() {
 
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:5000/api/users/verify-otp", {
+      const res = await fetch(`${API_BASE}/api/users/verify-otp`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -231,7 +232,7 @@ export default function UserLoginPage() {
 
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:5000/api/users/login", {
+      const res = await fetch(`${API_BASE}/api/users/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: email.trim(), password, role }),
@@ -637,7 +638,7 @@ function RegisterModal({
 
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:5000/api/users/register", {
+      const res = await fetch(`${API_BASE}/api/users/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),

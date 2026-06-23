@@ -11,20 +11,21 @@ export default function DriverRoutePage({ token, apiBase = '' }) {
   const [loading, setLoading] = useState(true);
   const socketRef = useRef(null);
   const authHeader = { headers: { Authorization: `Bearer ${token}` } };
+  const baseUrl = apiBase || import.meta.env.VITE_API_BASE || "";
 
   useEffect(() => {
     async function load() {
       try {
-        const me = await axios.get(`${apiBase}/api/auth/me`, authHeader);
+        const me = await axios.get(`${baseUrl}/api/auth/me`, authHeader);
         setUser(me.data.user);
         const uid = me.data.user;
         if (me.data.user.route && typeof me.data.user.route === 'object') {
           setRoute(me.data.user.route);
         } else if (me.data.user.route) {
-          const r = await axios.get(`${apiBase}/api/routes/${me.data.user.route}`, authHeader);
+          const r = await axios.get(`${baseUrl}/api/routes/${me.data.user.route}`, authHeader);
           setRoute(r.data.route || r.data);
         }
-        const rideResp = await axios.get(`${apiBase}/api/driver/my-active-ride`, authHeader).catch(()=>null);
+        const rideResp = await axios.get(`${baseUrl}/api/driver/my-active-ride`, authHeader).catch(()=>null);
         if (rideResp && rideResp.data && rideResp.data.ride) setRide(rideResp.data.ride);
       } catch (err) {
         console.error(err);
@@ -36,7 +37,7 @@ export default function DriverRoutePage({ token, apiBase = '' }) {
   }, [apiBase, token]);
 
   useEffect(() => {
-    const socket = io(apiBase || '/', { transports: ['websocket'], auth: token ? { token } : undefined });
+    const socket = io(baseUrl || '/', { transports: ['websocket'], auth: token ? { token } : undefined });
     socketRef.current = socket;
     socket.on('connect', () => {
       if (user && user._id) socket.emit('joinDriverRoom', user._id);

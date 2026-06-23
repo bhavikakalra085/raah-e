@@ -48,7 +48,7 @@ export default function AdminPage() {
   const [isAdmin, setIsAdmin] = useState(null);
   const [checkingRole, setCheckingRole] = useState(false);
 
-  const API_BASE = import.meta.env?.VITE_API_BASE || "http://localhost:5000";
+  const API_BASE = import.meta.env?.VITE_API_BASE || "";
   const storedToken = localStorage.getItem("token");
   const authHeader = { Authorization: `Bearer ${storedToken}` };
 
