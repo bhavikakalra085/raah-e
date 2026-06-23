@@ -15,6 +15,7 @@ function setSession(session) {
 }
 
 export default function UserLoginPage() {
+  console.log("USERLOGIN FIXED VERSION LOADED");
   const { t } = useTranslation("common");
 
   const { setIsLoggedIn } = useAuth();
