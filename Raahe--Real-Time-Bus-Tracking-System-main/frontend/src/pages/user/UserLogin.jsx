@@ -511,6 +511,7 @@ export default function UserLoginPage() {
 function RegisterModal({
   onClose,
   prefillIdentifier = "",
+  API_BASE = "",
   DEMO_FALLBACK = true,
   onRegisterSuccess,
 }) {
